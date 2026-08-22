@@ -1,17 +1,8 @@
-resource "aws_vpc" "main_vpc" {
-  cidr_block           = var.vpc_cidr
-  enable_dns_support   = true
-  enable_dns_hostnames = true
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "chandra-saini-terraform-bucket-btbb5434"
 
   tags = {
-    Name = "spring-vpc"
+    Name        = "Terraform S3 Bucket"
+    Environment = "Dev"
   }
 }
-
-# resource "aws_internet_gateway" "igw" {
-#   vpc_id = aws_vpc.main_vpc.id
-
-#   tags = {
-#     Name = "main-igw"
-#   }
-# }
