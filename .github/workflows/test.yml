@@ -27,7 +27,7 @@ jobs:
   test:
     name: Test
     needs: build
-    runs-on: [self-hosted, linux]
+    runs-on: [self-hosted, dev]
 
     steps:
       - name: Checkout Source Code
