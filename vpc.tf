@@ -4,14 +4,14 @@ resource "aws_vpc" "main_vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "main-vpc"
+    Name = "spring-vpc"
   }
 }
 
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main_vpc.id
+# resource "aws_internet_gateway" "igw" {
+#   vpc_id = aws_vpc.main_vpc.id
 
-  tags = {
-    Name = "main-igw"
-  }
-}
+#   tags = {
+#     Name = "main-igw"
+#   }
+# }

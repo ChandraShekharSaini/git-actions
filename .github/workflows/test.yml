@@ -2,12 +2,12 @@ name: Terraform Deploy
 
 on:
   # Uncomment if you want automatic deployment on push to main
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - master
 
   # Manual trigger only
-  workflow_dispatch:
+  #workflow_dispatch:
 
 jobs:
   terraform:
