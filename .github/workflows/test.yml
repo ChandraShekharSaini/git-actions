@@ -41,7 +41,7 @@ jobs:
   deploy:
     name: Deploy
     needs: test
-    runs-on: [self-hosted, amazon-linux]
+    runs-on: [self-hosted, amazonlinux]
 
     steps:
       - name: Checkout Source Code
