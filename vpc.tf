@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "chandra-saini-terrmmmafokkrm-bucket-btbb5434"
+  bucket = "chandra-saini-terrmmmafkokkrm-bucket-btbb5434"
 
   tags = {
     Name        = "TerrafmormS3Bucket"
