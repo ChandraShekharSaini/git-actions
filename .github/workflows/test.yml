@@ -4,7 +4,7 @@ name: Terraform S3 Deployment
 on:
   push:
     branches:
-      - main
+      - master
 
   workflow_dispatch:
 
