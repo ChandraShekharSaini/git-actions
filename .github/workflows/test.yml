@@ -43,7 +43,7 @@ jobs:
         run: |
           terraform plan
 
-      # 7. Terraform Apply
+      # 7. Terraform Apply 88
       - name: Terraform Apply
         run: |
           terraform apply -auto-approve
