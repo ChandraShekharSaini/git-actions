@@ -1,107 +1,52 @@
 
-name: Terraform S3 Deployment
+name: Multi-Runner CI
 
 on:
   push:
     branches:
       - master
 
-  workflow_dispatch:
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: us-east-1
 
 jobs:
-  terraform:
-    runs-on: [self-hosted, amazonlinux, dev]
+  build:
+    name: Build
+    runs-on: ubuntu-latest
 
     steps:
-
-      # 1. Checkout repository
-      - name: Checkout Code
+      - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      # 2. Check Terraform
-      - name: Check Terraform Version
+      - name: Build Application
         run: |
-          terraform version
+          echo "Building application on GitHub-hosted runner..."
+          echo "Build completed successfully."
 
-      # 3. Terraform Init
-      - name: Terraform Init
+  test:
+    name: Test
+    needs: build
+    runs-on: [self-hosted, dev]
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Run Tests
         run: |
-          terraform init
+          echo "Running tests on self-hosted Linux runner..."
+          echo "All tests passed."
 
-      # 4. Terraform Format
-      - name: Terraform Format
-        run: |
-          terraform fmt -check
+  deploy:
+    name: Deploy
+    needs: test
+    runs-on: [self-hosted, amazonlinux]
 
-      # 5. Terraform Validate
-      - name: Terraform Validate
-        run: |
-          terraform validate
-
-      # 6. Terraform Plan
-      - name: Terraform Plan
-        run: |
-          terraform plan
-
-      # 7. Terraform Apply 88
-      - name: Terraform Apply
-        run: |
-          terraform apply -auto-approve
-
-
-
-
-
-
-
-# name: Multi-Runner CI
-
-# on:
-#   push:
-#     branches:
-#       - master
-
-# env:
-#   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#   AWS_DEFAULT_REGION: us-east-1
-
-# jobs:
-#   build:
-#     name: Build
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout Source Code
-#         uses: actions/checkout@v4
-
-#       - name: Build Application
-#         run: |
-#           echo "Building application on GitHub-hosted runner..."
-#           echo "Build completed successfully."
-
-#   test:
-#     name: Test
-#     needs: build
-#     runs-on: [self-hosted, dev]
-
-#     steps:
-#       - name: Checkout Source Code
-#         uses: actions/checkout@v4
-
-#       - name: Run Tests
-#         run: |
-#           echo "Running tests on self-hosted Linux runner..."
-#           echo "All tests passed."
-
-#   deploy:
-#     name: Deploy
-#     needs: test
-#     runs-on: [self-hosted, amazonlinux]
-
-#     steps:
-#       - name: Checkout Source Code
-#         uses: actions/checkout@v4
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
 
 #       - name: Deploy Application
 #         run: |
