@@ -1,8 +1,8 @@
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "chandra-saini-terrmmmafkokkrm-bucket-btbb5434"
+resource "aws_vpc" "my_vpc" {
+  cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name        = "TerrafmormS3Bucket"
+    Name        = "TerraformVPC"
     Environment = "Dev"
   }
 }
